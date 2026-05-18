@@ -1,0 +1,22 @@
+package model.repository;
+
+import model.entity.Atendimento;
+
+import java.util.HashMap;
+
+public class AtendimentoRepository {
+
+    private final HashMap<Integer, Atendimento> atendimentos = new HashMap<>();
+
+    public void cadastrar(Atendimento atendimento) {
+        atendimentos.put(atendimento.getId(), atendimento);
+    }
+
+    public Atendimento buscarPorId(int id){
+        return atendimentos.get(id);
+    }
+
+    public HashMap<Integer, Atendimento> listar(){
+        return atendimentos;
+    }
+}
