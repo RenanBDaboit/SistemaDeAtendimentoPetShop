@@ -1,0 +1,97 @@
+package model.service;
+
+import model.entity.Atendimento;
+import model.entity.Pet;
+import model.repository.AtendimentoRepository;
+import model.repository.PetRepository;
+
+public class AtendimentoService {
+
+    public boolean cadastrar(int id, int idPet, String servico, double valor, PetRepository petRepository, AtendimentoRepository repository){
+
+        boolean petExistente = false;
+        Pet petCadastrar = null;
+
+        for (Atendimento atendimento : repository.listar().values()){
+            if (atendimento.getId() == id){
+                return false;
+            }
+        }
+
+        for (Pet pet : petRepository.listar().values()){
+            if (pet.getId() == idPet){
+                petExistente = true;
+                petCadastrar = pet;
+            }
+        }
+
+        if (!petExistente){
+            return false;
+        }
+
+        if (servico.isBlank()){
+            return false;
+        }
+
+        if (valor < 0){
+            return false;
+        }
+
+        repository.salvar(new Atendimento(petCadastrar, id, servico, valor));
+        return true;
+    }
+
+    public boolean atualizar(int id, int idPet, String servico, double valor, PetRepository petRepository, AtendimentoRepository repository){
+
+        boolean idExistente = false;
+
+        boolean petExistente = false;
+        Pet petCadastrar = null;
+
+        for (Atendimento atendimento : repository.listar().values()){
+            if (atendimento.getId() == id){
+                idExistente = true;
+            }
+        }
+
+        if (!idExistente){
+            return false;
+        }
+
+        for (Pet pet : petRepository.listar().values()){
+            if (pet.getId() == idPet){
+                petExistente = true;
+                petCadastrar = pet;
+            }
+        }
+
+        if (!petExistente){
+            return false;
+        }
+
+        if (servico.isBlank()){
+            return false;
+        }
+
+        if (valor < 0){
+            return false;
+        }
+
+        repository.salvar(new Atendimento(petCadastrar, id, servico, valor));
+        return true;
+    }
+
+    public boolean cancelar(int id, AtendimentoRepository repository){
+
+        boolean idExistente = false;
+
+        for (Atendimento atendimento : repository.listar().values()){
+            if (atendimento.getId() == id){
+                idExistente = true;
+            }
+        }
+
+
+        return true;
+    }
+}
