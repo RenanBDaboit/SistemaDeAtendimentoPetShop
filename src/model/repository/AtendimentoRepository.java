@@ -7,6 +7,10 @@ import java.util.HashMap;
 public class AtendimentoRepository {
 
     private final HashMap<Integer, Atendimento> atendimentos = new HashMap<>();
+    
+    public void salvar(Atendimento atendimento){
+        atendimentos.put(atendimento.getId(), atendimento);
+    }
 
     public void salvar(Atendimento atendimento) {
         atendimentos.put(atendimento.getId(), atendimento);
