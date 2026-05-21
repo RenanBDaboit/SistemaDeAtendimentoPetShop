@@ -7,6 +7,10 @@ import java.util.HashMap;
 public class PetRepository {
 
     private final HashMap<Integer, Pet> pets = new HashMap<>();
+    
+    public void salvar(Pet pet){
+        pets.put(pet.getId(), pet);
+    }
 
     public void cadastrar(Pet pet) {
         pets.put(pet.getId(), pet);
