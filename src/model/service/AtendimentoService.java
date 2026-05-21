@@ -37,7 +37,7 @@ public class AtendimentoService {
             return false;
         }
 
-        repository.salvar(new Atendimento(petCadastrar, id, servico, valor));
+        repository.salvar(new Atendimento(petCadastrar, id, servico, valor, Atendimento.Status.EM_ATENDIMENTO));
         return true;
     }
 
@@ -77,7 +77,7 @@ public class AtendimentoService {
             return false;
         }
 
-        repository.salvar(new Atendimento(petCadastrar, id, servico, valor));
+        repository.salvar(new Atendimento(petCadastrar, id, servico, valor, Atendimento.Status.EM_ATENDIMENTO));
         return true;
     }
 
@@ -86,12 +86,52 @@ public class AtendimentoService {
         boolean idExistente = false;
 
         for (Atendimento atendimento : repository.listar().values()){
-            if (atendimento.getId() == id){
+            if (atendimento.getId() == id && !(atendimento.getStatus().equals(Atendimento.Status.FINALIZADO))) {
                 idExistente = true;
             }
         }
 
+        if (!idExistente){
+            return false;
+        }
 
+        repository.listar().get(id).setStatus(Atendimento.Status.CANCELADO);
+        return true;
+    }
+
+    public boolean finalizar(int id, AtendimentoRepository repository){
+
+        boolean idExistente = false;
+
+        for (Atendimento atendimento : repository.listar().values()){
+            if (atendimento.getId() == id && !(atendimento.getStatus().equals(Atendimento.Status.CANCELADO))) {
+                idExistente = true;
+            }
+        }
+
+        if (!idExistente){
+            return false;
+        }
+
+        repository.listar().get(id).setStatus(Atendimento.Status.FINALIZADO);
+        return true;
+    }
+
+    public boolean remover(int id, AtendimentoRepository repository){
+
+        boolean idExistente = false;
+
+        for (Atendimento atendimento : repository.listar().values()){
+            if (atendimento.getId() == id && !(atendimento.getStatus().equals(Atendimento.Status.EM_ATENDIMENTO))) {
+                idExistente = true;
+            }
+        }
+
+        if (!idExistente){
+            return false;
+        }
+
+        repository.remover(id);
         return true;
     }
 }

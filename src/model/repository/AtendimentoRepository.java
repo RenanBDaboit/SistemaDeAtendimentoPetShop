@@ -12,14 +12,6 @@ public class AtendimentoRepository {
         atendimentos.put(atendimento.getId(), atendimento);
     }
 
-    public void salvar(Atendimento atendimento) {
-        atendimentos.put(atendimento.getId(), atendimento);
-    }
-
-    public Atendimento buscarPorId(int id){
-        return atendimentos.get(id);
-    }
-
     public HashMap<Integer, Atendimento> listar(){
         return atendimentos;
     }
