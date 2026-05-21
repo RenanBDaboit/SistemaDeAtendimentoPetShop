@@ -6,14 +6,21 @@ public class Atendimento {
     private Pet pet;
     private String servico;
     private double valor;
-    private String status;
+    public enum Status{
+        AGENDADO,
+        EM_ATENDIMENTO,
+        FINALIZADO,
+        CANCELADO
+    }
+    
+    public Status status;
 
-    public Atendimento(Pet pet, int id, String servico, double valor, String status) {
+    public Atendimento(Pet pet, int id, String servico, double valor, Status status) {
         this.pet = pet;
         this.id = id;
         this.servico = servico;
         this.valor = valor;
-        this.status = "Em andamento";
+        this.status = status;
     }
 
     public int getId() {
@@ -48,11 +55,11 @@ public class Atendimento {
         this.servico = servico;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 }

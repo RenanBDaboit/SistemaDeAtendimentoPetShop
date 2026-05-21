@@ -7,6 +7,10 @@ import java.util.HashMap;
 public class ClienteRepository {
 
     private final HashMap<Integer, Cliente> clientes = new HashMap<>();
+    
+    public void salvar(Cliente cliente){
+        clientes.put(cliente.getId(), cliente);
+    }
 
     public void cadastrar(Cliente cliente){
         clientes.put(cliente.getId(), cliente);
