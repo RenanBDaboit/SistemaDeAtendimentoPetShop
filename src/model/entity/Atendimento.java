@@ -8,7 +8,7 @@ public class Atendimento {
     private double valor;
     private String status;
 
-    public Atendimento(Pet pet, int id, String servico, double valor, String status) {
+    public Atendimento(Pet pet, int id, String servico, double valor) {
         this.pet = pet;
         this.id = id;
         this.servico = servico;

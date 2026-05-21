@@ -8,7 +8,7 @@ public class AtendimentoRepository {
 
     private final HashMap<Integer, Atendimento> atendimentos = new HashMap<>();
 
-    public void cadastrar(Atendimento atendimento) {
+    public void salvar(Atendimento atendimento) {
         atendimentos.put(atendimento.getId(), atendimento);
     }
 
@@ -18,5 +18,9 @@ public class AtendimentoRepository {
 
     public HashMap<Integer, Atendimento> listar(){
         return atendimentos;
+    }
+
+    public void remover(int id){
+        atendimentos.remove(id);
     }
 }
