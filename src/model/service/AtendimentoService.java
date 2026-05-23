@@ -37,18 +37,16 @@ public class AtendimentoService {
             return false;
         }
 
-        repository.salvar(new Atendimento(petCadastrar, id, servico, valor, Atendimento.Status.EM_ATENDIMENTO));
+        repository.salvar(new Atendimento(petCadastrar, id, servico, valor, Atendimento.Status.AGENDADO));
         return true;
     }
 
-    public boolean atualizar(int id, int idPet, String servico, double valor, PetRepository petRepository, AtendimentoRepository repository){
+    public boolean atualizarStatus(int id, Atendimento.Status status, AtendimentoRepository repository){
 
         boolean idExistente = false;
 
-        boolean petExistente = false;
-        Pet petCadastrar = null;
 
-        for (Atendimento atendimento : repository.listar().values()){
+        for (Atendimento atendimento :repository.listar().values()){
             if (atendimento.getId() == id){
                 idExistente = true;
             }
@@ -58,11 +56,31 @@ public class AtendimentoService {
             return false;
         }
 
+        repository.atualizarStatus(id, status);
+        return true;
+    }
+
+    public boolean atualizar(int id, int idPet, String servico, double valor, Atendimento.Status status, PetRepository petRepository, AtendimentoRepository repository){
+
+        boolean idExistente = false;
+        boolean petExistente = false;
+        Pet petCadastrar = null;
+
+        for (Atendimento atendimento : repository.listar().values()){
+            if (atendimento.getId() == id){
+                idExistente = true;
+            }
+        }
+
         for (Pet pet : petRepository.listar().values()){
             if (pet.getId() == idPet){
                 petExistente = true;
                 petCadastrar = pet;
             }
+        }
+
+        if (!idExistente){
+            return false;
         }
 
         if (!petExistente){
@@ -77,7 +95,7 @@ public class AtendimentoService {
             return false;
         }
 
-        repository.salvar(new Atendimento(petCadastrar, id, servico, valor, Atendimento.Status.EM_ATENDIMENTO));
+        repository.atualizar(new Atendimento(petCadastrar, id, servico, valor, status));
         return true;
     }
 
