@@ -25,7 +25,7 @@ public class AtendimentoController {
     }
 
     public boolean cadastrar(int id, int idPet, String servico, double valor, Atendimento.Status status) {
-        return atendimentoService.cadastrar(id, idPet, servico, valor, petRepository, atendimentoRepository);
+        return atendimentoService.cadastrar(id, idPet, servico, valor, status, petRepository, atendimentoRepository);
     }
 
     public boolean atualizarStatus(int id, Atendimento.Status status) {

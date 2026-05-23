@@ -62,4 +62,15 @@ public class Atendimento {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Atendimento{" +
+                "id=" + id +
+                ", pet=" + pet +
+                ", servico='" + servico + '\'' +
+                ", valor=" + valor +
+                ", status=" + status +
+                '}';
+    }
 }

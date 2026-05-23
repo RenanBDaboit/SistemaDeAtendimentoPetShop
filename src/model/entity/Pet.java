@@ -45,5 +45,13 @@ public class Pet {
         this.cliente = cliente;
     }
 
-
+    @Override
+    public String toString() {
+        return "Pet{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", especie='" + especie + '\'' +
+                ", cliente=" + cliente +
+                '}';
+    }
 }

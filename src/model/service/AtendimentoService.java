@@ -7,7 +7,7 @@ import model.repository.PetRepository;
 
 public class AtendimentoService {
 
-    public boolean cadastrar(int id, int idPet, String servico, double valor, PetRepository petRepository, AtendimentoRepository repository){
+    public boolean cadastrar(int id, int idPet, String servico, double valor, Atendimento.Status status, PetRepository petRepository, AtendimentoRepository repository){
 
         boolean petExistente = false;
         Pet petCadastrar = null;
@@ -37,7 +37,7 @@ public class AtendimentoService {
             return false;
         }
 
-        repository.salvar(new Atendimento(petCadastrar, id, servico, valor, Atendimento.Status.AGENDADO));
+        repository.salvar(new Atendimento(petCadastrar, id, servico, valor, status));
         return true;
     }
 
