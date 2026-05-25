@@ -41,7 +41,7 @@ public class PetView {
     private final Scanner scanner = new Scanner(System.in);
 
 
-    public void menuCliente() {
+    public void menuPet() {
 
         int op;
 
@@ -103,9 +103,9 @@ public class PetView {
         boolean sucesso = petController.cadastrar(id, nome, especie, idCliente);
 
         if (sucesso) {
-            System.out.println("Sucesso ao cadastrar cliente");
+            System.out.println("Sucesso ao cadastrar pet");
         } else {
-            System.out.println("Erro ao cadastrar cliente");
+            System.out.println("Erro ao cadastrar pet");
         }
     }
 

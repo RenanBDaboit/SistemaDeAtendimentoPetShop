@@ -49,6 +49,12 @@ public class AtendimentoService {
         for (Atendimento atendimento :repository.listar().values()){
             if (atendimento.getId() == id){
                 idExistente = true;
+                if (atendimento.getStatus().equals(Atendimento.Status.CANCELADO) && status.equals(Atendimento.Status.FINALIZADO)){
+                    return false;
+                }
+                if (atendimento.getStatus().equals(Atendimento.Status.FINALIZADO) && status.equals(Atendimento.Status.CANCELADO)){
+                    return false;
+                }
             }
         }
 

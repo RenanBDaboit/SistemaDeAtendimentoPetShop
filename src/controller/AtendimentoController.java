@@ -29,7 +29,7 @@ public class AtendimentoController {
     }
 
     public boolean atualizarStatus(int id, Atendimento.Status status) {
-        return atendimentoService.atualizarStatus(id, status);
+        return atendimentoService.atualizarStatus(id, status, atendimentoRepository);
     }
 
     public HashMap<Integer, Atendimento> listarAtendimento() {
