@@ -70,10 +70,10 @@ public class AtendimentoView {
                         listarAtendimento();
                     }
                     case 3 -> {
-
+                        atualizarStatus();
                     }
                     case 4 -> {
-
+                        remover();
                     }
                     case 0 -> {
                         System.out.println("Saindo...");
@@ -125,9 +125,9 @@ public class AtendimentoView {
         boolean sucesso = atendimentoController.cadastrar(id, idPet, servico, valor, Atendimento.Status.AGENDADO);
 
         if (sucesso) {
-            System.out.println("Sucesso ao cadastrar cliente");
+            System.out.println("Sucesso ao cadastrar atendimento");
         } else {
-            System.out.println("Erro ao cadastrar cliente");
+            System.out.println("Erro ao cadastrar atendimento");
         }
     }
 
@@ -143,4 +143,76 @@ public class AtendimentoView {
         }
     }
 
+    public void atualizarStatus() {
+        int id;
+        int novoStatus;
+        Atendimento.Status status;
+
+        try {
+            listarAtendimento();
+            System.out.print("Digite o ID: ");
+            id = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException n) {
+            System.out.println("Apenas números!");
+            id = -1;
+        }
+
+        try {
+            System.out.println("Selecione o status:");
+            System.out.println("1. AGENDADO");
+            System.out.println("2. EM ATENDIMENTO");
+            System.out.println("3. FINALIZADO");
+            System.out.println("4. CANCELADO");
+            novoStatus = Integer.parseInt(scanner.nextLine());
+
+            switch (novoStatus){
+                case 1:
+                    status = Atendimento.Status.AGENDADO;
+                    break;
+
+                case 2:
+                    status = Atendimento.Status.EM_ATENDIMENTO;
+                    break;
+
+                case 3:
+                    status = Atendimento.Status.FINALIZADO;
+                    break;
+
+                case 4:
+                    status = Atendimento.Status.CANCELADO;
+                    break;
+
+                default:
+                    throw new NumberFormatException();
+            }
+
+        } catch (NumberFormatException n) {
+            System.out.println("Selecione uma opção correta");
+            status = null;
+        }
+
+        boolean sucesso = atendimentoController.atualizarStatus(id, status);
+
+        if (sucesso){
+            System.out.println("Sucesso ao alterar status do atendimento");
+        }
+        else {
+            System.out.println("Inválida a troca de status");
+        }
+    }
+
+    public void remover(){
+        int id;
+
+        try {
+            listarAtendimento();
+            System.out.print("Digite o ID: ");
+            id = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException n) {
+            System.out.println("Apenas números!");
+            id = -1;
+        }
+
+        atendimentoController.remover(id);
+    }
 }
